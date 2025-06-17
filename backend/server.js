@@ -22,7 +22,7 @@ db.connect((err) => {
 });
 
 app.get("/", (req, res) => {
-  // res.json("Hello from Backend, test server");
+  // res.json("Hello from Backend");
   const sql = "SELECT * FROM student";
   db.query(sql, (err, data) => {
     if (err) return res.json("Error!");
