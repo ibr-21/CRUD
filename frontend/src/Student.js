@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
+function normalizeKeys(obj) {
+  // to avoid case-sensitive keys
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [key.toLowerCase(), value])
+  );
+}
+
 function Student() {
   const [student, setStudent] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:8081/")
-      .then((res) => setStudent(res.data))
+      .then((res) =>{
+        const normalized = res.data.map((item) => normalizeKeys(item));
+        setStudent(normalized)
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -37,15 +48,15 @@ function Student() {
           <tbody>
             {student.map((data, i) => (
               <tr key={i}>
-                <td>{data.Name}</td>
-                <td>{data.Email}</td>
+                <td>{data.name || "N/A"}</td>
+                <td>{data.email || "N/A"}</td>
                 <td>
-                  <Link to={`/update/${data.ID}`} className="btn btn-primary">
+                  <Link to={`/update/${data.id}`} className="btn btn-primary">
                     Update
                   </Link>
                   <button
                     className="btn btn-danger ms-3"
-                    onClick={(e) => handelDel(data.ID)}
+                    onClick={(e) => handelDel(data.id)}
                   >
                     Delete
                   </button>

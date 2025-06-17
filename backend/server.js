@@ -9,8 +9,16 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "my1Admin2#",
+  password: "mySql25#",
   database: "crud",
+});
+// Connect to MySQL
+db.connect((err) => {
+  if (err) {
+    console.error('Connection failed: ', err.stack);
+    return;
+  }
+  console.log('Connected to MySQL as ID', db.threadId);
 });
 
 app.get("/", (req, res) => {
