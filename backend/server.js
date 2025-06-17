@@ -12,7 +12,7 @@ const db = mysql.createConnection({
   password: "mySql25#",
   database: "crud",
 });
-// Connect to MySQL
+// Check Connection to MySQL
 db.connect((err) => {
   if (err) {
     console.error('Connection failed: ', err.stack);
