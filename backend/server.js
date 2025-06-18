@@ -23,7 +23,7 @@ app.use(cors());
 
     console.log("✅ Connected to MongoDB Atlas and ping verified");
   } catch (err) {
-    console.log("❌ Connection Error: " + err);
+    console.log(" Connection Error: " + err);
   }
 })();
 
