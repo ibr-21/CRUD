@@ -1,14 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient ,ObjectId} = require("mongodb");
-
-
+const { MongoClient, ObjectId } = require("mongodb");
 
 const app = express();
 
-
 // Replace <password> with your actual Atlas password (URL-encoded if needed)
-const uri = "mongodb+srv://devuser:devUser@mydev.c4udgdc.mongodb.net/";
+const uri = "mongodb+srv://devuser:<password>@mydev.c4udgdc.mongodb.net/";
 
 const client = new MongoClient(uri);
 const mdb = client.db("test");
@@ -34,7 +31,7 @@ app.use(cors());
 // let a = async () => {
 //   try {
 //     const doc = await coll.find({}).toArray();
-//     console.log(doc)   
+//     console.log(doc)
 //   } catch (err) {
 //     console.error(err);
 //   }
@@ -53,7 +50,8 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/create", async (req, res) => {
-  const newDoc = { // dont use  $ set with insert
+  const newDoc = {
+    // dont use  $ set with insert
     name: req.body.name,
     email: req.body.email,
   };
@@ -67,9 +65,6 @@ app.post("/create", async (req, res) => {
     res.status(500).json({ error: "Insert failed" });
   }
 });
-
-
-
 
 app.put("/update/:id", async (req, res) => {
   const id = req.params.id; // from URL like /update/663bd123...
@@ -99,7 +94,6 @@ app.put("/update/:id", async (req, res) => {
   }
 });
 
-
 app.delete("/student/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -119,7 +113,6 @@ app.delete("/student/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 const PORT = 8081;
 app.listen(PORT, () => {
