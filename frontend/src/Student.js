@@ -51,12 +51,12 @@ function Student() {
                 <td>{data.name || "N/A"}</td>
                 <td>{data.email || "N/A"}</td>
                 <td>
-                  <Link to={`/update/${data.id}`} className="btn btn-primary">
+                  <Link to={`/update/${data._id}`} className="btn btn-primary">
                     Update
                   </Link>
                   <button
                     className="btn btn-danger ms-3"
-                    onClick={(e) => handelDel(data.id)}
+                    onClick={(e) => handelDel(data._id)}
                   >
                     Delete
                   </button>
